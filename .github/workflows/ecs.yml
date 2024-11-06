@@ -47,11 +47,6 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      # Vamos fazer o donwload da minha task definition e passar para um arquivo json:
-      - name: Download task definition
-        run: |
-          aws ecs describe-task-definition --task-definition servico1 --query taskDefinition > task-definition.json
-
       # Aqui, vai alterar a nossa task definition para utilizar a nova tag da imagem, ou seja, a task definition passa a utilizar a nova imagem.
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
